@@ -1,0 +1,84 @@
+<br />
+
+<!-- Contenedor principal del formulario -->
+<div class="container app-root">
+  <!-- Fila para centrar el título -->
+  <div class="col" style="text-align: center;">
+    <!-- Título de la aplicación -->
+    <h3>{{title}}</h3>
+  </div>
+  <!-- Espacio en blanco -->
+  <br />
+
+  <!-- Formulario para agregar vehículos -->
+  <form class="form-group row">
+    <!-- Campo de entrada para la marca -->
+    <div class="form-group col-md-3">
+      <label for="marca">Marca:</label>
+      <input type="text"
+             name="marca"
+             id="marca"
+             placeholder="Indique Marca"
+             class="form-control"
+             [(ngModel)]="cuadroMarca"
+             required> <!-- Campo de marca obligatorio -->
+      <!-- Mensaje de validación para el campo de marca -->
+      <div *ngIf="!cuadroMarca" class="text-danger">Marca requerida</div>
+    </div>
+
+    <!-- Campo de entrada para el modelo -->
+    <div class="form-group col-md-3">
+      <label for="modelo">Modelo:</label>
+      <input type="text"
+             name="modelo"
+             id="modelo"
+             placeholder="Indique Modelo"
+             class="form-control"
+             [(ngModel)]="cuadroModelo"
+             required> <!-- Campo de modelo obligatorio -->
+    </div>
+
+    <!-- Campo de entrada para la autonomía -->
+    <div class="form-group col-md-3">
+      <label for="autonomia">Autonomía:</label>
+      <input type="number"
+             name="autonomia"
+             id="autonomia"
+             placeholder="Autonomia"
+             class="form-control"
+             [(ngModel)]="cuadroAutonomia">
+             <!-- [(ngModel)]="cuadroAutonomia" Enlace de dos vías con la variable cuadroAutonomia -->
+    </div>
+  </form>
+
+  <br />
+
+ <!-- Utilizamos un div con la clase "col" para ajustar el ancho del grupo de botones -->
+<div class="col">
+  <!-- Utilizamos un div con la clase "btn-group" para agrupar los botones -->
+  <div class="btn-group" role="group" aria-label="Botones">
+    <!-- Botón para agregar un vehículo -->
+    <button class="btn btn-primary" (click)="agregarVehiculo()">Añadir</button>
+    <!-- Botón para eliminar un vehículo, solo se muestra si hay vehículos en la lista -->
+    <button class="btn btn-outline-danger"
+            *ngIf="vehiculos.length > 0"
+            (click)="eliminarVehiculo()">Eliminar</button>
+  </div>
+</div>
+
+
+</div>
+
+<!-- Espacio en blanco -->
+<br />
+
+<!-- Componente hijo de lista de vehículos -->
+ <!-- Directiva *ngFor para iterar sobre la lista de vehículos -->
+   <!-- Propiedad de entrada para pasar el vehículo actual al componente hijo -->
+   <!-- Propiedad de entrada para pasar el índice del vehículo actual al componente hijo -->
+   <!-- Directiva [ngClass] para aplicar una clase CSS condicionalmente -->
+<app-compo-hijo-list *ngFor="let vehiculo of vehiculos; let i=index"
+                      [vehiculoLista]="vehiculo"
+                      [indice]="i"
+                      [ngClass]="{'azulCSS': vehiculo.marca.toLowerCase() === 'tesla'}">
+</app-compo-hijo-list>

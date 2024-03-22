@@ -1,0 +1,31 @@
+<div class="container app-compo-hijo-list">
+  <div class="row">
+    <div class="col">
+      <div>
+        <!-- Muestra el índice del vehículo en la lista -->
+        {{indice+1}} -
+        <!-- Muestra la marca y el modelo del vehículo -->
+        {{vehiculoLista.marca}} {{vehiculoLista.modelo}}
+        <!-- Aplica una clase de estilo condicional si la autonomía es menor que 500 -->
+        <span [ngClass]="{'autonomia500rojoCSS': vehiculoLista.autonomia < 500}">
+          <!-- Muestra la autonomía del vehículo -->
+          {{vehiculoLista.autonomia}}
+        </span>
+      </div>
+
+
+    <!--
+  Aquí se utiliza el componente 'app-compo-hijo2' con un enlace de evento.
+  Cuando el componente hijo emite el evento 'fechaEntrega', se llama a la función 'agregarFechaArray()' en el componente padre,
+  y se pasa el valor emitido como argumento a esta función.
+-->
+<app-compo-hijo2 (fechaEntrega)="agregarFechaArray($event)"></app-compo-hijo2>
+
+
+      <!-- Lista de fechas -->
+      <ul style="list-style: none;">
+        <li *ngFor="let fecha of arrayFecha">{{fecha}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
