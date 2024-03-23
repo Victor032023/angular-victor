@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ServicioDatosService } from './servicio-datos.service';
 
 @Component({
   selector: 'app-root',
@@ -6,12 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  // Propiedades para almacenar el título de la aplicación y la lista de vehículos
+  // INYECTO SERVICIO EN EL CONSTRUCTOR
+  constructor(private vehiculoService: ServicioDatosService) {}
+
+  // Propiedad para almacenar el título de la aplicación
   title = 'VEHÍCULOS ELÉCTRICOS';
-  vehiculos: any[] = [
-    { marca: "Tesla", modelo: "Model3", autonomia: 650 },
-    { marca: "Tesla", modelo: "ModelY", autonomia: 550 }
-  ];
 
   // Propiedades para almacenar los valores de los cuadros de texto
   cuadroMarca: string = "";
@@ -26,16 +26,22 @@ export class AppComponent {
       modelo: this.cuadroModelo,
       autonomia: this.cuadroAutonomia
     };
-    // Añadimos el nuevo vehiculo al array
-    this.vehiculos.push(elVehiculo);
+    // Añadimos el nuevo vehículo al servicio
+    this.vehiculoService.agregarVehiculoService(elVehiculo);
+    // Limpiamos los cuadros de texto después de agregar un vehículo
+    // this.cuadroMarca = "";
+    // this.cuadroModelo = "";
+    // this.cuadroAutonomia = 0;
   }
-// creo atributo/varibale de clase opcional que irá tomando el valor de vehiculos eliminados de la lista
-  vehiculoEliminado?: string;
 
-// Función para eliminar un vehículo a la lista
-eliminarVehiculo() {
-  this.vehiculoEliminado = this.vehiculos.pop();
-// esto es opcinal, muestra registro de vehiculos eliminados por consola del navegador
-  console.log(this.vehiculoEliminado)
-}
+  // Función para eliminar un vehículo de la lista
+  eliminarVehiculo() {
+    // Eliminamos el último vehículo del servicio
+    this.vehiculoService.eliminarVehiculoService();
+  }
+
+  // Método para obtener la lista de vehículos desde el servicio
+  get vehiculos() {
+    return this.vehiculoService.vehiculos;
+  }
 }

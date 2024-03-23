@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { CompoHijoListComponent } from './compo-hijo-list/compo-hijo-list.component';
 import { CompoHijo2Component } from './compo-hijo2/compo-hijo2.component';
+import { ServicioDatosService } from './servicio-datos.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { CompoHijo2Component } from './compo-hijo2/compo-hijo2.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    ServicioDatosService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
