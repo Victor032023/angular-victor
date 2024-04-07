@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CochesInterface } from '../coches-interface';
 
 @Component({
   selector: 'app-compo-hijo-list', // Selector del componente
@@ -7,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CompoHijoListComponent implements OnInit { // Definición de la clase del componente
 
-  @Input() vehiculoLista: any; // Propiedad de entrada para recibir datos del componente padre
+  @Input() vehiculoLista: CochesInterface; // Propiedad de entrada para recibir datos del componente padre
   @Input() indice: number; // Propiedad de entrada para recibir el índice del vehículo en la lista
 
   constructor() { } // Constructor del componente

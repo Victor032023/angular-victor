@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ServicioDatosService } from './servicio-datos.service';
+import { CochesInterface } from './coches-interface';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,7 @@ import { ServicioDatosService } from './servicio-datos.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  // INYECTO SERVICIO EN EL CONSTRUCTOR
+  // INYECTO SERVICIO EN EL CONSTRUCTOR (como parametro o argumento del metodo constructor)
   constructor(private vehiculoService: ServicioDatosService) {}
 
   // Propiedad para almacenar el título de la aplicación
@@ -21,10 +22,10 @@ export class AppComponent {
   // Función para agregar un nuevo vehículo a la lista
   agregarVehiculo() {
     // Creamos un nuevo objeto vehiculo con los valores de los cuadros de texto
-    let elVehiculo = {
+    let elVehiculo: CochesInterface = {
       marca: this.cuadroMarca,
       modelo: this.cuadroModelo,
-      autonomia: this.cuadroAutonomia
+      autonomia: this.cuadroAutonomia,
     };
     // Añadimos el nuevo vehículo al servicio
     this.vehiculoService.agregarVehiculoService(elVehiculo);
@@ -41,7 +42,7 @@ export class AppComponent {
   }
 
   // Método para obtener la lista de vehículos desde el servicio
-  get vehiculos() {
+  get vehiculos(): CochesInterface[] {
     return this.vehiculoService.vehiculos;
   }
 }
