@@ -31,16 +31,10 @@
       "id": 5
     },
     {
-      "marca": "zxcv",
-      "modelo": "f",
-      "autonomia": 104,
-      "id": 6
-    },
-    {
       "marca": "",
       "modelo": "",
       "autonomia": 100,
-      "id": 7
+      "id": 6
     }
   ]
 }
