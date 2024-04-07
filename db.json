@@ -1,0 +1,46 @@
+{
+  "vehiculos": [
+    {
+      "marca": "",
+      "modelo": "",
+      "autonomia": 100,
+      "id": 1
+    },
+    {
+      "marca": "",
+      "modelo": "",
+      "autonomia": 100,
+      "id": 2
+    },
+    {
+      "marca": "",
+      "modelo": "",
+      "autonomia": 100,
+      "id": 3
+    },
+    {
+      "marca": "sdf",
+      "modelo": "",
+      "autonomia": 115,
+      "id": 4
+    },
+    {
+      "marca": "",
+      "modelo": "",
+      "autonomia": 100,
+      "id": 5
+    },
+    {
+      "marca": "zxcv",
+      "modelo": "f",
+      "autonomia": 104,
+      "id": 6
+    },
+    {
+      "marca": "",
+      "modelo": "",
+      "autonomia": 100,
+      "id": 7
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 
-export interface CochesInterface {
+export interface CocheInterface {
 
   id? : string;
   marca: string;

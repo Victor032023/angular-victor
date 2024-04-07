@@ -1,48 +1,58 @@
-import { Component } from '@angular/core';
-import { ServicioDatosService } from './servicio-datos.service';
-import { CochesInterface } from './coches-interface';
+import { Component, OnInit } from '@angular/core';
+import { ServicioDatosService } from './servicio/servicio-datos.service';
+import { CocheInterface } from './interface/coche-interface';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  // INYECTO SERVICIO EN EL CONSTRUCTOR (como parametro o argumento del metodo constructor)
+export class AppComponent implements OnInit {
+
+  titulo = 'VEHÍCULOS ELÉCTRICOS';
+  isVisible: boolean = true;
+  cuadroMarca: string = '';
+  cuadroModelo: string = '';
+  cuadroAutonomia: number = 100;
+  vehiculos$: Observable<CocheInterface[]>; // Observable para la lista de vehículos
+
   constructor(private vehiculoService: ServicioDatosService) {}
 
-  // Propiedad para almacenar el título de la aplicación
-  title = 'VEHÍCULOS ELÉCTRICOS';
+  ngOnInit(): void {
+    this.cargarVehiculos();
+  }
 
-  // Propiedades para almacenar los valores de los cuadros de texto
-  cuadroMarca: string = "";
-  cuadroModelo: string = "";
-  cuadroAutonomia: number = 0;
+  cargarVehiculos() {
+    this.vehiculos$ = this.vehiculoService.cargarVehiculos();
+  }
 
-  // Función para agregar un nuevo vehículo a la lista
   agregarVehiculo() {
-    // Creamos un nuevo objeto vehiculo con los valores de los cuadros de texto
-    let elVehiculo: CochesInterface = {
+    const nuevoVehiculo: CocheInterface = {
       marca: this.cuadroMarca,
       modelo: this.cuadroModelo,
-      autonomia: this.cuadroAutonomia,
+      autonomia: this.cuadroAutonomia
     };
-    // Añadimos el nuevo vehículo al servicio
-    this.vehiculoService.agregarVehiculoService(elVehiculo);
-    // Limpiamos los cuadros de texto después de agregar un vehículo
-    // this.cuadroMarca = "";
-    // this.cuadroModelo = "";
-    // this.cuadroAutonomia = 0;
+
+    this.vehiculoService.agregarVehiculoService(nuevoVehiculo).subscribe(() => {
+      this.cargarVehiculos();
+      this.limpiarCampos();
+    });
   }
 
-  // Función para eliminar un vehículo de la lista
   eliminarVehiculo() {
-    // Eliminamos el último vehículo del servicio
-    this.vehiculoService.eliminarVehiculoService();
+    this.vehiculoService.eliminarVehiculoService().subscribe(() => {
+      this.cargarVehiculos();
+    });
   }
 
-  // Método para obtener la lista de vehículos desde el servicio
-  get vehiculos(): CochesInterface[] {
-    return this.vehiculoService.vehiculos;
+  alternarVisibilidadBoton() {
+    this.isVisible = !this.isVisible;
+  }
+
+  limpiarCampos() {
+    this.cuadroMarca = '';
+    this.cuadroModelo = '';
+    this.cuadroAutonomia = 100;
   }
 }

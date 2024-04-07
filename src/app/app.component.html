@@ -4,8 +4,8 @@
 <div class="container app-root">
   <!-- Fila para centrar el título -->
   <div class="col" style="text-align: center;">
-    <!-- Título de la aplicación -->
-    <h3>{{title}}</h3>
+    <!-- Título de la aplicación INTERPOLACION-->
+    <h3>{{titulo}}</h3>
   </div>
   <!-- Espacio en blanco -->
   <br />
@@ -53,32 +53,25 @@
 
   <br />
 
- <!-- Utilizamos un div con la clase "col" para ajustar el ancho del grupo de botones -->
+<!-- Utilizamos un div con la clase "col" para ajustar el ancho del grupo de botones -->
 <div class="col">
   <!-- Utilizamos un div con la clase "btn-group" para agrupar los botones -->
   <div class="btn-group" role="group" aria-label="Botones">
-    <!-- Botón para agregar un vehículo -->
+    <!-- Botones para agregar y eliminar vehículos -->
     <button class="btn btn-primary" (click)="agregarVehiculo()">Añadir</button>
-    <!-- Botón para eliminar un vehículo, solo se muestra si hay vehículos en la lista -->
-    <button class="btn btn-outline-danger"
-            *ngIf="vehiculos.length > 0"
-            (click)="eliminarVehiculo()">Eliminar</button>
+    <button class="btn btn-outline-danger" (click)="eliminarVehiculo()">Eliminar</button>
   </div>
-</div>
-
-
 </div>
 
 <!-- Espacio en blanco -->
 <br />
 
 <!-- Componente hijo de lista de vehículos -->
- <!-- Directiva *ngFor para iterar sobre la lista de vehículos -->
-   <!-- Propiedad de entrada para pasar el vehículo actual al componente hijo -->
-   <!-- Propiedad de entrada para pasar el índice del vehículo actual al componente hijo -->
-   <!-- Directiva [ngClass] para aplicar una clase CSS condicionalmente -->
-<app-compo-hijo-list *ngFor="let vehiculo of vehiculos; let i=index"
-                      [vehiculoLista]="vehiculo"
-                      [indice]="i"
-                      [ngClass]="{'azulCSS': vehiculo.marca.toLowerCase() === 'tesla'}">
-</app-compo-hijo-list>
+<ng-container *ngIf="vehiculos$ | async as vehiculos">
+  <!-- Iteramos sobre la lista de vehículos -->
+  <app-compo-hijo-list *ngFor="let vehiculo of vehiculos; let i=index"
+                        [vehiculoLista]="vehiculo"
+                        [indice]="i"
+                        [ngClass]="{'azulCSS': vehiculo.marca.toLowerCase() === 'tesla'}">
+  </app-compo-hijo-list>
+</ng-container>

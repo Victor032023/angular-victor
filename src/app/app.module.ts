@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { CompoHijoListComponent } from './compo-hijo-list/compo-hijo-list.component';
 import { CompoHijo2Component } from './compo-hijo2/compo-hijo2.component';
-import { ServicioDatosService } from './servicio-datos.service';
+import { ServicioDatosService } from './servicio/servicio-datos.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ServicioDatosService } from './servicio-datos.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     ServicioDatosService
