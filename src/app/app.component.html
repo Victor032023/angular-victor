@@ -65,6 +65,18 @@
 
 <!-- Espacio en blanco -->
 <br />
+<!-- Componente del botón de alternancia -->
+<button type="button" class="btn btn-primary" (click)="alternarVisibilidadBoton()">Mostrar/Ocultar</button>
+<br />
+
+
+<div *ngIf="isVisible; else contenidoOculto">
+Ahora visible es true
+</div>
+
+<ng-template #contenidoOculto>
+Ahora visible es false
+</ng-template>
 
 <!-- Componente hijo de lista de vehículos -->
 <ng-container *ngIf="vehiculos$ | async as vehiculos">
